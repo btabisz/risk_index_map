@@ -1,6 +1,9 @@
-import styles from './DateFilter.module.css';
+import Form from 'react-bootstrap/Form';
+import { Container, Row, Col } from 'react-bootstrap'
+
 
 const DateFilter = (props) => {
+    console.log(props.map)
     const monthChangeHandler = (event) => {
         props.onChangeMonth(event.target.value);
     };
@@ -9,12 +12,24 @@ const DateFilter = (props) => {
         props.onChangeYear(event.target.value);
     };
 
+    const gridChangeHandler = (event) => {
+      props.onChangeGrid(event.target.checked)
+  };
+
 
   return (
-    <div className={styles['date-filter']}>
-      <div className={styles['date-filter__control']}>
-        <label>Filter by month and year</label>
-        <select value={props.selectedMonth} onChange={monthChangeHandler}>
+  
+    <Container>
+        <Row>
+          {props.map === "CRPM" &&
+          <Col lg={7}></Col>
+  }
+          {props.map === "RIM" &&
+          <>
+          <Col lg={1}></Col>
+          <Col md="auto">
+           Month: 
+          <Form.Select value={props.selectedMonth} onChange={monthChangeHandler}>
           <option value='01'>1</option>
           <option value='02'>2</option>
           <option value='03'>3</option>
@@ -27,8 +42,13 @@ const DateFilter = (props) => {
           <option value='10'>10</option>
           <option value='11'>11</option>
           <option value='12'>12</option>
-        </select>
-        <select value={props.selectedYear} onChange={yearChangeHandler}>
+        </Form.Select>
+        </Col>
+        </>
+        }
+        <Col  md="auto">
+        Year:
+        <Form.Select value={props.selectedYear} onChange={yearChangeHandler}>
           <option value='1989'>1989</option>
           <option value='1990'>1990</option>
           <option value='1991'>1991</option>
@@ -64,9 +84,21 @@ const DateFilter = (props) => {
           <option value='2021'>2021</option>
           <option value='2022'>2022</option>
           <option value='2023'>2023</option>
-        </select>
-      </div>
-    </div>
+        </Form.Select>
+        </Col>
+        <Col  md="auto">Settings:
+        <Form.Check
+        defaultChecked
+        type="switch"
+        value={"on"}
+        id="custom-switch"
+        label="Map grid"
+        onChange={gridChangeHandler}
+      />
+
+        </Col>
+        </Row>
+        </Container>
   );
 };
 

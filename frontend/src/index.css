@@ -1,13 +1,9 @@
-* {
-  box-sizing: border-box;
+main{
+  min-height: 80vh;
 }
-
-html {
-  font-family: sans-serif;
+h3{
+  padding: 1rem;
 }
-
-body {
-  margin: 0;
-  background-color: rgb(201, 215, 234);
-  padding: 25px;
+.rating span{
+  margin:0.1rem;
 }
